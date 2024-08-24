@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leave a comment</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            color: chocolate;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: blanchedalmond;
+        }
+        .comments {
+            margin-top: 100px;
+            width: 1200px;
+            padding: 50px 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.43);
+            box-shadow: 0 10px 30px #00000020;
+        }
+        .form {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+            padding-bottom: 70px;
+        }
+
+        input:focus
+        textarea:focus{
+            outline: none;
+        }
+
+        input,
+        textarea {
+            border: none;
+            color: antiquewhite;
+            margin-bottom: 40px;
+            font: 700 30px '';
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        #username {
+            height: 90px;
+        }
+
+        #comment {
+            height: 200px;
+        }
+
+        .comments h1 {
+            width: 100px;
+            text-align:left;
+            margin-bottom: 70px;
+            font-size: 90px;
+            letter-spacing: 10px;
+        }
+
+        #submitButton {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-color: burlywood;
+            border: none;
+            font-size: 30px;
+            width: 200px;
+            height: 70px;
+            border-radius: 50px;
+        }
+
+        #board {
+            width: 100%;
+            margin: 10px;
+            padding: 10px;
+            
+            background-color: aliceblue;
+            animation: commentFadeIn 0.5s ease forwards;
+            margin: 70px 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px #00000020;
+            text-shadow: 0px 0px 20px #ffffff;
+        }
+
+        .comment-info {
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 36px;
+            position: relative;
+        }
+
+        .info {
+            transform: translateY(-30px);
+        }
+
+        .info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 10px #fff solid;
+        }
+
+        strong {
+            position: absolute;
+            width: 800px;
+            letter-spacing: 3px;
+            top: 70px;
+            left: 170px;
+        }
+
+        .comment-info span {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .content {
+            font-size: 36px;
+            margin: 30px;
+            width: 95%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="comments">
+        <h1>Comment</h1>
+        <div class="form">
+            <input type="text" id="username" placeholder="username">
+            <textarea id="comment" placeholder="comment content"></textarea>
+            <button id="submitButton">submit</button>
+        </div>
+        <div id="board">
+            <div class="comment">
+                <div class="comment-info">
+                    <div class="info">
+                        <img src="https://aipixelartgenerator.com/wp-content/uploads/2023/09/ai-pixel-art-generator2.jpg" width="50px" height="50px">
+                        <strong>N/A</strong>
+                    </div>
+                    <span>published by: 2024/05/07 08:00:00</span>
+                </div>
+                <div class="content">hello</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('submitButton').addEventListener('click', function(){
+        let username = document.getElementById('username').value;
+        let comment = document.getElementById('comment').value;
+        if (comment === ''){
+            alert('please enter content.');
+            return;
+        }
+        if (username === ''){
+            username = 'N/A'
+        }
+        let board = document.getElementById('board');
+        let newComment = document.createElement('div');
+        newComment.classList.add('comment')
+        newComment.innerHTML = '<div class="comment-info"><div class="info"><img src="https://aipixelartgenerator.com/wp-content/uploads/2023/09/ai-pixel-art-generator2.jpg" width="50px" height="50px"><strong>'+username+ 
+            '</strong></div><span>published by: '
+            +getCurrentTime()+'</span></div><div class="content">'+comment+'</div><br><br><br>';
+        board.insertBefore(newComment,board.firstChild);
+        document.getElementById('username').value = '';
+        document.getElementById('comment').value = '';
+    });
+
+    function getCurrentTime(){
+        let now = new Date();
+        let year = now.getFullYear();
+        let month = ('0'+(now.getMonth()+1)).slice(-2);
+        let day = ('0'+now.getDate()).slice(-2);
+        let hrs = ('0'+now.getHours()).slice(-2);
+        let mins = ('0'+now.getMinutes()).slice(-2);
+        let secs = ('0'+now.getSeconds()).slice(-2);
+        return year+'/'+month+'/'+day+'/'+ ' '+hrs+':'+mins+":"+secs;
+    }
+</script>
+</html>

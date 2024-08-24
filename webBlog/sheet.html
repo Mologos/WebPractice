@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>check-in</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,td {
+            border: 1px solid peru;
+            text-align: center;
+            padding: 8px;
+            margin-top: 20px;
+        }
+
+        th {
+            background-color: bisque;
+        }
+
+        button {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">check sheet</h1>
+    <table id="table">
+        <tr>
+            <th>name</th>
+            <th>plan name</th>
+            <th>operation</th>
+        </tr>
+        <tr id="example">
+            <td>Mol</td>
+            <td>web courses</td>
+            <td>
+                <button>add</button>
+                <button>delete</button>
+            </td>
+        </tr>
+    </table>
+    <button onclick="addRow()">add new data</button>
+    <script>
+        function addRow(){
+            let table = document.getElementById('table');
+            let length = table.rows.length;
+            let newRow = table.insertRow(length);
+            
+            let nameCol = newRow.insertCell(0);
+            let planCol = newRow.insertCell(1);
+            let operationCol = newRow.insertCell(2);
+
+            nameCol.innerHTML = 'N/A';
+            planCol.innerHTML = 'none';
+            operationCol.innerHTML = '<button>add</button><button>delete</button>';
+        }
+    </script>
+</body>
+</html>
